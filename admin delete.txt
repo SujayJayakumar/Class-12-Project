@@ -1,0 +1,99 @@
+def delete1():
+    global root
+    r=[]
+    lang=box_customer_id.get()
+    sql='''select customer_id from customer;'''
+    cursor.execute(sql)
+    while True:
+        data=cursor.fetchone()
+        if data==None:
+            break
+        else:
+            print(data[0])
+            r.append(data[0])
+    if lang in r:
+        cursor.execute("delete from customer where customer_id='"+ lang +"'")
+        my.commit()
+        customer_id_label=Label(root1, text='CID deleted sucessfully')
+        customer_id_label.grid(row=5,column=0)
+        box_customer_id.delete(0,END)
+    else:
+        root=Tk()
+        root.title('delete')
+        root.geometry('200x200')
+        customer_id_label=Label(root, text='CID not found')
+        customer_id_label.grid(row=0,column=0)
+
+        delete_btn=Button(root,text='Try again',command=delete2)
+        delete_btn.grid(row=20,column=0,columnspan=2,pady=10,ipadx=100)
+        box_customer_id.delete(0,END)
+
+def delete2():
+    root.destroy()
+    box_customer_id.delete(0,END)
+    
+        
+    
+    '''cursor.execute("delete from customer where customer_id='"+ box_customer_id.get() +"'")
+        my.commit()
+        root=Tk()
+        root.title('Delete sucess')
+        root.geometry('200x200')
+        customer_id_label=Label(root, text='CID deleted sucessfully')
+        customer_id_label.grid(row=0,column=0)
+
+        delete_btn=Button(root,text='OK',command=delete1)
+        delete_btn.grid(row=20,column=0,columnspan=2,pady=10,ipadx=100)
+    except:
+        root=Tk()
+        root.title('delete')
+        root.geometry('200x200')
+        customer_id_label=Label(root, text='CID not found')
+        customer_id_label.grid(row=0,column=0)
+
+        delete_btn=Button(root,text='Try again',command=delete1)
+        delete_btn.grid(row=20,column=0,columnspan=2,pady=10,ipadx=100)'''
+    
+    
+
+
+    
+
+
+def delete():
+    global root1
+    global box_customer_id
+    root1=Tk()
+    root1.title('delete')
+    root1.geometry('400x400')
+    box_customer_id=Entry(root1, width=30)
+    box_customer_id.grid(row=0,column=1,padx=20)
+
+    customer_id_label=Label(root1, text='CID to be deleted:')
+    customer_id_label.grid(row=0,column=0)
+
+    delete_btn=Button(root1,text='delete record from database',command=delete1)
+    delete_btn.grid(row=20,column=0,columnspan=2,pady=10,ipadx=100)
+
+    my=mysql.connector.connect(host='localhost',user='root',database='project',password='password')
+    cursor=my.cursor()
+    if my.is_connected():
+        print('Database connected')
+    cursor.execute("delete from customer where customer_id='"+ box_customer_id.get() +"'")
+    my.commit()
+    my.close()
+    
+    '''if(e_customer_id.get()==''):
+        MessageBox.showinfo('Delete Status','CID is compulsory for deleting record')
+    else:
+        my=mysql.connector.connect(host='localhost',user='root',database='project',password='password')
+        cursor=my.cursor()
+        if my.is_connected():
+            print('Database connected')
+        cursor.execute("delete from customer where customer_id='"+ e_customer_id.get() +"'")
+        cursor.execute('commit');
+
+        e_customer_id.delete(0,'end')
+        e_f_name.delete(0,'end')
+        e_username.delete(0,'end')
+        MessageBox.showinfo('Delete Status','Deleted succesfully')'''

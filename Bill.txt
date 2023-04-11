@@ -1,0 +1,11 @@
+ Items	Number of Items	  Cost of Items
+
+Phone		1	  ₹ 200
+
+laptop		2	  ₹ 1800
+
+HDD		3	  ₹ 600
+
+================================
+Total Price		6	₹ 2600
+================================
